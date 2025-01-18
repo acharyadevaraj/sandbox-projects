@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width:90%;
+          align:center
+        }
+
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 10px;
+        }
+
+        tr {
+          background-color: white;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div style="display: flex;  align-items: center; gap: 20px;">
+        <img th:src="'data:image/jpeg;base64,' + ${bankLogo}" alt="UniBank Logo"></img>
+        <span>UniBank</span>
+
+    </div>
+    <p>UniBank Savings ******6255</p>
+    <p>Card No ******4062</p>
+    <p>Statement of UniBank form 01-11-23 to 30-11-23 </p>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Particulars</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Balance</th>
+
+        </tr>
+        <tr th:each="item: ${transactions}">
+            <td th:text="${item.date}"></td>
+            <td th:text="${item.particulars}"></td>
+            <td th:text="${item.debit == 0 ? '' : item.debit}"></td>
+            <td th:text="${item.credit == 0 ? '' : item.credit}"></td>
+            <td th:text="${item.balance}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

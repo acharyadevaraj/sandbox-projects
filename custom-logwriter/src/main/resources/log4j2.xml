@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="30">
+	<Properties>
+		<Property name="LOG_PATTERN">[%d{dd-MM-yyyy HH:mm:ss.SSS}] @:@ ${hostName}@:@ ${bundle:application:spring.application.name} @:@ %m%n%ex</Property>
+		<Property name="PRODUCT_NAME">${bundle:application:spring.application.name}</Property>
+		<Property name="APP_LOG_ROOT">C:/temp</Property>
+	</Properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+		</Console>
+
+		<RollingFile name="appLog"
+			fileName="${APP_LOG_ROOT}/${PRODUCT_NAME}-info/application.log"
+			filePattern="${APP_LOG_ROOT}/archive/${PRODUCT_NAME}-info-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="19500KB" />
+			</Policies>
+			<DefaultRolloverStrategy max="1" />
+		</RollingFile>
+
+		<RollingFile name="infoLog"
+			fileName="${APP_LOG_ROOT}/${PRODUCT_NAME}-info/application.log"
+			filePattern="${APP_LOG_ROOT}/archive/${PRODUCT_NAME}-info-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="19500KB" />
+			</Policies>
+			<DefaultRolloverStrategy max="1" />
+		</RollingFile>
+
+		<RollingFile name="errorLog"
+			fileName="${APP_LOG_ROOT}/${PRODUCT_NAME}-error/application.log"
+			filePattern="${APP_LOG_ROOT}/archive/${PRODUCT_NAME}-error-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="19500KB" />
+			</Policies>
+			<DefaultRolloverStrategy max="1" />
+		</RollingFile>
+
+		<RollingFile name="debugLog"
+			fileName="${APP_LOG_ROOT}/${PRODUCT_NAME}-debug/application.log"
+			filePattern="${APP_LOG_ROOT}/archive/${PRODUCT_NAME}-debug-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="19500KB" />
+			</Policies>
+			<DefaultRolloverStrategy max="1" />
+		</RollingFile>
+
+	</Appenders>
+	<Loggers>
+
+		<Logger name="com.customlogwriter" additivity="false"
+			level="info">
+			<!-- <AppenderRef ref="appLog" /> -->
+			<AppenderRef ref="infoLog" />
+			<AppenderRef ref="errorLog" />
+			<AppenderRef ref="debugLog" />
+			<AppenderRef ref="Console" />
+		</Logger>
+
+		<Root level="INFO">
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>
