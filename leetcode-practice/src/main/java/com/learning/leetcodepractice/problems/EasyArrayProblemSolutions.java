@@ -1,9 +1,7 @@
 package com.learning.leetcodepractice.problems;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 public class EasyArrayProblemSolutions {
 
     /**
@@ -63,6 +61,38 @@ public class EasyArrayProblemSolutions {
             arr[index] = 0;
             index++;
         }
+    }
+
+    /**
+     * Problem Statement: #3 (Find the largest and smallest elements in an array)
+     * <p>
+     * Given an array of integers, this method identifies and returns the smallest
+     * and largest values in the array.
+     * <p>
+     * Approach:
+     * 1. Initialize two variables:
+     * - `smallest` with the maximum possible integer value.
+     * - `largest` with the minimum possible integer value.
+     * 2. Traverse the array:
+     * - Compare each element with `smallest` and `largest`.
+     * 3. Return the smallest and largest values.
+     * <p>
+     * Time Complexity: O(n)
+     */
+    public static void findLargestAndSmallest(int[] arr) {
+        int smallest = Integer.MAX_VALUE;
+        int largest = Integer.MIN_VALUE;
+
+        for (int num : arr) {
+            if (num < smallest) {
+                smallest = num;
+            }
+            if (num > largest) {
+                largest = num;
+            }
+        }
+        System.out.println("Smallest Element: " + smallest);
+        System.out.println("Largest Element: " + largest);
     }
 
     /**
