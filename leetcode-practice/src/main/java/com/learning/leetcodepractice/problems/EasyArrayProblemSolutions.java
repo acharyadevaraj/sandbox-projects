@@ -2,6 +2,7 @@ package com.learning.leetcodepractice.problems;
 
 import java.util.HashMap;
 import java.util.Map;
+
 public class EasyArrayProblemSolutions {
 
     /**
@@ -93,6 +94,100 @@ public class EasyArrayProblemSolutions {
         }
         System.out.println("Smallest Element: " + smallest);
         System.out.println("Largest Element: " + largest);
+    }
+
+    /**
+     * Problem Statement: #4 (Find the second largest element in an array without sorting)
+     * <p>
+     * Approach:
+     * 1. Initialize `largest` and `secondLargest` to the smallest possible integer.
+     * 2. Loop through the array:
+     * - If an element is larger than `largest`, update `secondLargest` to `largest` and set `largest` to the element.
+     * - If the element is between `largest` and `secondLargest`, update `secondLargest`.
+     * 3. After the loop, return `secondLargest` or `-1` if there is no second largest element.
+     * <p>
+     * Time Complexity: O(n) – We traverse the array once.
+     * <p>
+     * Example:
+     * Input: [10, 5, 20, 20, 4]
+     * Output: 10
+     */
+    public int findSecondLargest(int[] arr) {
+        int largest = Integer.MIN_VALUE;
+        int secondLargest = Integer.MIN_VALUE;
+
+        for (int num : arr) {
+            if (num > largest) {
+                secondLargest = largest;
+                largest = num;
+            } else if (num > secondLargest && num != largest) {
+                secondLargest = num;
+            }
+        }
+        return (secondLargest == Integer.MIN_VALUE) ? -1 : secondLargest;
+    }
+
+    /**
+     * Problem Statement: #5 (Check if an array is sorted and rotated)
+     * <p>
+     * An array is considered sorted and rotated if:
+     * 1. It is sorted in ascending order.
+     * 2. After sorting, it has been rotated from some pivot index.
+     * <p>
+     * Approach:
+     * 1. Count the number of "order breaks".
+     * 2. The array is sorted and rotated if:
+     * - The number of order breaks is at most one.
+     * - The last element is less than or equal to the first element (rotation condition).
+     * <p>
+     * Time Complexity: O(n) – The array is traversed once.
+     * <p>
+     * Example:
+     * Input: [3, 4, 5, 1, 2]
+     * Output: true (sorted and rotated)
+     */
+    public static boolean isSortedAndRotated(int[] arr) {
+        int n = arr.length;
+        int count = 0;
+
+        // Count the number of order breaks
+        for (int i = 0; i < n; i++) {
+            if (arr[i] > arr[(i + 1) % n]) {
+                count++;
+            }
+        }
+        // The array is sorted and rotated if there's at most one order break
+        return count <= 1;
+    }
+
+    /**
+     * Problem Statement: #6 (Remove Duplicates from Sorted Array)
+     * <p>
+     * Approach:
+     * 1. Use two pointers:
+     * - `i` to track the position of the last unique element.
+     * - `j` to traverse the array.
+     * 2. Compare the current element (`nums[j]`) with the last unique element (`nums[i]`).
+     * 3. If they are different, move `i` forward and update `nums[i]` with `nums[j]`.
+     * 4. Return `i + 1`, which is the count of unique elements.
+     * <p>
+     * Example:
+     * Input: [1, 1, 2, 2, 3, 4, 4, 5]
+     * Output: 5 (Modified array: [1, 2, 3, 4, 5])
+     */
+    public int removeDuplicates(int[] nums) {
+        if (nums == null || nums.length == 0) return 0; // Handle edge case
+
+        int i = 0; // Pointer for the last unique element
+
+        for (int j = 1; j < nums.length; j++) {
+            // Check if current element is different from the last unique one
+            if (nums[j] != nums[i]) {
+                i++; // Move the unique pointer forward
+                nums[i] = nums[j]; // Update the position with the current unique element
+            }
+        }
+        return i + 1; // Length of the unique elements
     }
 
     /**
