@@ -209,24 +209,6 @@ public class StreamProblemSolutions {
     }
 
     /**
-     * Problem Statement #12: (Find the maximum number in a list)
-     * <p>
-     * Approach:
-     * 1. Use the `max` method of the Stream API with `Integer::compareTo`.
-     * <p>
-     * Example:
-     * Input: [10, 15, 118, 49, 25, 98, 98, 32, 15]
-     * Output: 118
-     */
-    public void findMaximumNumber() {
-        List<Integer> myList = Arrays.asList(10, 15, 118, 49, 25, 98, 98, 32, 15);
-        Integer max = myList.stream()
-                .max(Integer::compareTo)
-                .get();
-        System.out.println(max);
-    }
-
-    /**
      * Problem Statement #13: (Find the first non-repeated character in a string)
      * <p>
      * Approach:

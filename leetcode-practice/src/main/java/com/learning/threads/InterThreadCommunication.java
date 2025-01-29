@@ -27,11 +27,11 @@ public class InterThreadCommunication {
     public static void main(String[] args) {
         InterThreadCommunication threadCommunication = new InterThreadCommunication();
 
-        new Thread() {
+        Thread thread1 = new Thread() {
             public void run() {
                 threadCommunication.withdraw(20000);
             }
-        }.start();
+        };
 
         try {
             Thread.sleep(2000);
@@ -39,10 +39,12 @@ public class InterThreadCommunication {
             e.printStackTrace();
         }
 
-        new Thread() {
+        Thread thread2 = new Thread() {
             public void run() {
                 threadCommunication.deposit(10000);
             }
-        }.start();
+        };
+        thread1.start();
+        thread2.start();
     }
 }

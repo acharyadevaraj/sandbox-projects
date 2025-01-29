@@ -1,4 +1,4 @@
-package com.learning.leetcodepractice.problems.designguru;
+package com.learning.leetcodepractice.problems;
 
 import java.util.ArrayList;
 import java.util.Arrays;

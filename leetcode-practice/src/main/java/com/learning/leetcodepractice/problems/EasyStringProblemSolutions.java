@@ -377,8 +377,8 @@ public class EasyStringProblemSolutions {
     public String longestPalindrome(String s) {
         String longest = "";
         for (int i = 0; i < s.length(); i++) {
-            for (int j = i; j < s.length(); j++) {
-                String input = s.substring(i, j + 1);
+            for (int j = i + 1; j < s.length(); j++) {
+                String input = s.substring(i, j);
                 if (isPalindrome(input) && input.length() > longest.length()) {
                     longest = input;
                 }

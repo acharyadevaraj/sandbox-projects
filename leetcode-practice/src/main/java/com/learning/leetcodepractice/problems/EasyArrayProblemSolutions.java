@@ -1,7 +1,9 @@
 package com.learning.leetcodepractice.problems;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class EasyArrayProblemSolutions {
 
@@ -214,4 +216,38 @@ public class EasyArrayProblemSolutions {
         }
         return new int[]{};
     }
+
+    /**
+     * @param nums1
+     * @param nums2
+     * @return Link : https://leetcode.com/problems/find-common-elements-between-two-arrays/
+     */
+    public int[] findCommonElements(int[] nums1, int[] nums2) {
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>();
+
+        for (int num : nums2) {
+            set1.add(num);
+        }
+
+        int count1 = 0;
+        for (int num : nums1) {
+            if (set1.contains(num)) {
+                count1++;
+            }
+        }
+
+        for (int num : nums1) {
+            set2.add(num);
+        }
+
+        int count2 = 0;
+        for (int num : nums2) {
+            if (set2.contains(num)) {
+                count2++;
+            }
+        }
+        return new int[]{count1, count2};
+    }
+
 }

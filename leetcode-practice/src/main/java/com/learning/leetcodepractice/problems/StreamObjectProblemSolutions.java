@@ -2,11 +2,7 @@ package com.learning.leetcodepractice.problems;
 
 import com.learning.leetcodepractice.entity.Employee;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StreamObjectProblemSolutions {
@@ -90,5 +86,29 @@ public class StreamObjectProblemSolutions {
         System.out.println("Name: " + oldestEmployee.getName());
         System.out.println("Age: " + oldestEmployee.getAge());
         System.out.println("Department: " + oldestEmployee.getDepartment());
+    }
+
+    public void getMaxSalaryByDepartment() {
+        Map<String, Optional<Employee>> empMap = Employee.getEmployees().stream()
+                .collect(Collectors.groupingBy(emp -> emp.getDepartment(), Collectors.maxBy(
+                        Comparator.comparingDouble(emp -> emp.getSal())
+                )));
+
+        empMap.forEach((department, employee) -> {
+            System.out.println("Department: " + department + ", Max Salary Employee: " + employee.orElse(null));
+        });
+    }
+
+    public void countGenderByDepartment(){
+        Map<String, Map<String, Long>> genderCountByDept = Employee.getEmployees().stream()
+                .collect(Collectors.groupingBy(e -> e.getDepartment(),
+                Collectors.groupingBy(e -> e.getGender() , Collectors.counting())));
+
+        genderCountByDept.forEach((department, genderCount) -> {
+            System.out.println("Department: " + department);
+            genderCount.forEach((gender, count) -> {
+                System.out.println("  " + gender + ": " + count);
+            });
+        });
     }
 }

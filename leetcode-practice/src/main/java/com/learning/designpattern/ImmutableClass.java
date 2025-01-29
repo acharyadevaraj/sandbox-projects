@@ -1,8 +1,8 @@
 package com.learning.designpattern;
 
 public final class ImmutableClass {
-    private String name;
-    private int age;
+    private final String name;
+    private final int age;
 
     public ImmutableClass(String name, int age) {
         this.name = name;
