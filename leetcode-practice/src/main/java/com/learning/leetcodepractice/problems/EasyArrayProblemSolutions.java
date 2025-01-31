@@ -1,8 +1,6 @@
 package com.learning.leetcodepractice.problems;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class EasyArrayProblemSolutions {
@@ -193,31 +191,6 @@ public class EasyArrayProblemSolutions {
     }
 
     /**
-     * Two sum
-     * <p>
-     * Example:
-     * Input: nums = [3, 2, 4], target = 6
-     * Output: [1, 2]
-     * Explanation: nums[1] + nums[2] = 2 + 4 = 6
-     *
-     * @param nums   the input array of integers
-     * @param target the target sum
-     * @return an array of two indices that satisfy the condition
-     */
-    public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int diff = target - nums[i];
-
-            if (map.containsKey(diff)) {
-                return new int[]{map.get(diff), i};
-            }
-            map.put(nums[i], i);
-        }
-        return new int[]{};
-    }
-
-    /**
      * @param nums1
      * @param nums2
      * @return Link : https://leetcode.com/problems/find-common-elements-between-two-arrays/
@@ -250,4 +223,36 @@ public class EasyArrayProblemSolutions {
         return new int[]{count1, count2};
     }
 
+    /**
+     * Problem Statement: #8 ( Reverse an Array In-Place)
+     * <p>
+     * Approach:
+     * 1. Initialize two pointers:
+     * - `start` at the beginning of the array (index 0).
+     * - `end` at the end of the array (index `array.length - 1`).
+     * 2. Swap the elements at the `start` and `end` pointers.
+     * 3. Move the `start` pointer forward and the `end` pointer backward.
+     * 4. Repeat the process until the `start` pointer is greater than or equal to the `end` pointer.
+     * 5. This results in the array being reversed in-place without using extra space (other than a temporary variable).
+     * <p>
+     * Example:
+     * Input: [1, 2, 3, 4, 5]
+     * Output: [5, 4, 3, 2, 1]
+     */
+    public static void reverseArrayInPlace(int[] array) {
+        int start = 0;
+        int end = array.length - 1;
+
+        // Loop to swap elements from the start and end
+        while (start < end) {
+            // Swap elements at start and end
+            int temp = array[start];
+            array[start] = array[end];
+            array[end] = temp;
+
+            // Move pointers towards the center
+            start++;
+            end--;
+        }
+    }
 }

@@ -37,11 +37,6 @@ public class ArrayProblemRunner {
                     for (int i = 0; i < inputArray.length; i++) {
                         nums[i] = Integer.parseInt(inputArray[i].trim());
                     }
-                    System.out.print("Enter the target sum: ");
-                    int target = scanner.nextInt();
-                    int[] result = problemSolutions.twoSum(nums, target);
-                    System.out.println("Indices: [" + result[0] + ", " + result[1] + "]");
-                    break;
                 default:
                     System.out.println("Invalid choice! Please select either 1 or 2.");
             }

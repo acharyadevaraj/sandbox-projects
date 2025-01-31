@@ -342,4 +342,21 @@ public class StreamProblemSolutions {
                 .filter(s -> !s.equals(" "))
                 .collect(Collectors.groupingBy(ch -> ch, Collectors.counting()));
     }
+
+    /**
+     * Problem Statement #19: (Count occurrences of specific words in a string, ignoring case sensitivity)
+     * <p>
+     * Example:
+     * Input:
+     * String input = "There are many ARE s in this sentence and I
+     * request you to identify how many ARE s or arE s or are s in this.";
+     * List<String> list = Arrays.asList("if", "are", "you");
+     * Output: {are=3, you=1}
+     */
+    public Map<String, Long> countWordOccurrences(String input, List<String> targetWords) {
+        return Arrays.stream(input.split("\\s+"))
+                .map(String::toLowerCase)
+                .filter(word -> targetWords.contains(word))
+                .collect(Collectors.groupingBy(word -> word, Collectors.counting()));
+    }
 }
