@@ -1,12 +1,7 @@
 package com.learning.leetcodepractice.problems;
 
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class EasyStringProblemSolutions {
 
@@ -284,7 +279,7 @@ public class EasyStringProblemSolutions {
     }
 
     /**
-     * Finds the first unique character in a string.
+     * Problem Number: #8 (Finds the first unique character in a string)
      * <p>
      * Example:
      * Input: "leetcode"
@@ -308,14 +303,11 @@ public class EasyStringProblemSolutions {
     }
 
     /**
-     * Checks if a given string is a palindrome.
+     * Problem Number: #9 (Checks if a given string is a palindrome)
      * <p>
      * Example:
      * Input: "madam"
      * Output: true
-     *
-     * @param s the input string
-     * @return true if the string is a palindrome, false otherwise
      */
     public boolean isPalindrome(String s) {
         int mid = (s.length() / 2) - 1;
@@ -331,15 +323,11 @@ public class EasyStringProblemSolutions {
     }
 
     /**
-     * Checks if two strings are anagrams of each other using a HashMap.
+     * Problem Number: #10 (Checks if two strings are anagrams of each other using a HashMap)
      * <p>
      * Example:
      * Input: "listen", "silent"
      * Output: true
-     *
-     * @param s1 the first string
-     * @param s2 the second string
-     * @return true if the strings are anagrams, false otherwise
      */
     public boolean isAnagram(String s1, String s2) {
         if (s1.length() != s2.length()) {
@@ -365,14 +353,11 @@ public class EasyStringProblemSolutions {
     }
 
     /**
-     * Computes the length of the longest palindromic substring in a given string.
+     * Problem Number: #11 (Computes the length of the longest palindromic substring in a given string)
      * <p>
      * Example:
      * Input: "babad"
      * Output: 3 (The longest palindromic substring is "bab" or "aba")
-     *
-     * @param s the input string
-     * @return the length of the longest palindromic substring
      */
     public String longestPalindrome(String s) {
         String longest = "";
@@ -385,5 +370,109 @@ public class EasyStringProblemSolutions {
             }
         }
         return longest;
+    }
+
+    /**
+     * Problem Number: #12 (Finds the longest common prefix string amongst an array of strings)
+     * <p>
+     * Example:
+     * Input: ["flower", "flow", "flight"]
+     * Output: "fl"
+     * <p>
+     * Input: ["dog", "racecar", "car"]
+     * Output: "" (No common prefix)
+     */
+    public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0) {
+            return "";
+        }
+
+        String prefix = strs[0];
+        for (int i = 1; i < strs.length; i++) {
+            while (strs[i].indexOf(prefix) != 0) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+            }
+            if (prefix.isEmpty()) {
+                return "";
+            }
+        }
+        return prefix;
+    }
+
+    /**
+     * Problem Number: #13 (Rotate String)
+     * <p>
+     * Problem Statement:
+     * Given two strings `s` and `goal`, return true if and only if `s` can become `goal` after some number of shifts on `s`.
+     * A shift consists of moving the leftmost character of `s` to the rightmost position.
+     * <p>
+     * Time Complexity: O(n)
+     * <p>
+     * Example:
+     * Input: s = "abcde", goal = "cdeab"
+     * Output: true
+     * <p>
+     * Input: s = "abcde", goal = "abced"
+     * Output: false
+     */
+    public static boolean rotateString(String s, String goal) {
+        // Ensure s and goal are of the same length and non-empty
+        if (s.length() != goal.length()) {
+            return false;
+        }
+
+        // Concatenate s with itself. If goal is a valid rotation, it must be a substring.
+        String doubleS = s + s;
+
+        // Check if goal is a valid substring of s + s
+        return doubleS.contains(goal);
+    }
+
+    /**
+     * Problem Number: #14 (Sort Characters by Frequency)
+     * <p>
+     * Problem Statement:
+     * Given a string `s`, sort it in decreasing order based on the frequency of the characters.
+     * The frequency of a character is the number of times it appears in the string.
+     * <p>
+     * Approach:
+     * 1. **Frequency Count**:
+     * - Use a HashMap to count the frequency of each character in the string.
+     * 2. **Sorting**:
+     * - Convert the keys of the map to a list and sort them by frequency in descending order.
+     * 3. **Building the Result**:
+     * - Construct the result string by appending each character based on its frequency.
+     * <p>
+     * Time Complexity: O(n log n) due to sorting.
+     * <p>
+     * Example:
+     * Input: s = "tree"
+     * Output: "eert" or "eetr"
+     * <p>
+     * Input: s = "cccaaa"
+     * Output: "aaaccc" or "cccaaa"
+     */
+    public static String sortByFrequency(String inputString) {
+
+        Map<Character, Integer> frequencyMap = new HashMap<>();
+        StringBuilder resultString = new StringBuilder();
+
+        // Step 1: Create a frequency map for characters
+        for (char character : inputString.toCharArray()) {
+            frequencyMap.put(character, frequencyMap.getOrDefault(character, 0) + 1);
+        }
+
+        // Step 2: Convert keys to a list and sort based on frequency (in descending order)
+        List<Character> sortedCharacters = new ArrayList<>(frequencyMap.keySet());
+        sortedCharacters.sort((char1, char2) -> frequencyMap.get(char2) - frequencyMap.get(char1));
+
+        // Step 3: Build the resulting string by appending characters based on their frequencies
+        for (char character : sortedCharacters) {
+            int frequency = frequencyMap.get(character);
+            for (int i = 0; i < frequency; i++) {
+                resultString.append(character);
+            }
+        }
+        return resultString.toString();
     }
 }

@@ -255,4 +255,30 @@ public class EasyArrayProblemSolutions {
             end--;
         }
     }
+
+    /**
+     * Problem Statement: #9 (find the third digit from the left)
+     * Given an integer `num`, find the third digit from the left without converting it into a string.
+     * If the number has less than 3 digits, do not print anything.
+     * <p>
+     * Approach:
+     * 1. Reduce `num` by continuously dividing by 10 until only the first three digits remain.
+     * 2. Extract the third digit using modulo operation (`num % 10`).
+     * <p>
+     * Example:
+     * Input: 67433
+     * Output: 4
+     */
+    public static void findThirdDigit(int num) {
+        if (num < 100) {
+            return; // Don't print anything for numbers with less than 3 digits
+        }
+
+        while (num >= 1000) { // Remove extra digits until 3 digits remain
+            num /= 10;
+        }
+
+        int thirdDigit = num % 10; // Extract the third digit
+        System.out.println(thirdDigit);
+    }
 }

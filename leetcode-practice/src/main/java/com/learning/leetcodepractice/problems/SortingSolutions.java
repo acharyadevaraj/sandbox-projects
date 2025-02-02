@@ -39,6 +39,25 @@ public class SortingSolutions {
         return -1; // Target not found
     }
 
+    public static void bubbleSort(int arr[]) {
+        int length = arr.length - 1;
+
+        for (int i = 0; i < length; i++) {
+            boolean swapped = false;
+            for (int j = 0; j < length - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) {
+                break;
+            }
+        }
+    }
+
     public static int findKthLargest(int[] nums, int k) {
         PriorityQueue<Integer> minHeap = new PriorityQueue<>(k); // Min-Heap
 

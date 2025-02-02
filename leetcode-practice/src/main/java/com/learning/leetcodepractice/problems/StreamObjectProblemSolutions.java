@@ -9,11 +9,6 @@ public class StreamObjectProblemSolutions {
     /**
      * Problem Statement #1: (Find the count of employees by gender)
      * <p>
-     * Approach:
-     * 1. Fetch the list of employees.
-     * 2. Group employees by their gender using `Collectors.groupingBy`.
-     * 3. Count the number of employees in each gender group.
-     * <p>
      * Example:
      * Input: List of employees with gender Male and Female.
      * Output: {Male=3, Female=2}
@@ -28,10 +23,6 @@ public class StreamObjectProblemSolutions {
 
     /**
      * Problem Statement #2: (Find distinct departments in the organization)
-     * <p>
-     * Approach:
-     * 1. Fetch the list of employees.
-     * 2. Extract distinct department names using `distinct`.
      * <p>
      * Example:
      * Input: List of employees with departments IT, HR, and Finance.
@@ -79,7 +70,7 @@ public class StreamObjectProblemSolutions {
      */
     public void findOldestEmployee(List<Employee> employees) {
         Employee oldestEmployee = employees.stream()
-                .max(Comparator.comparing(Employee::getAge))
+                .max(Comparator.comparingInt(Employee::getAge))
                 .orElseThrow(() -> new NoSuchElementException("No employees found"));
 
         System.out.println("Oldest Employee:");
@@ -99,10 +90,10 @@ public class StreamObjectProblemSolutions {
         });
     }
 
-    public void countGenderByDepartment(){
+    public void countGenderByDepartment() {
         Map<String, Map<String, Long>> genderCountByDept = Employee.getEmployees().stream()
                 .collect(Collectors.groupingBy(e -> e.getDepartment(),
-                Collectors.groupingBy(e -> e.getGender() , Collectors.counting())));
+                        Collectors.groupingBy(e -> e.getGender(), Collectors.counting())));
 
         genderCountByDept.forEach((department, genderCount) -> {
             System.out.println("Department: " + department);

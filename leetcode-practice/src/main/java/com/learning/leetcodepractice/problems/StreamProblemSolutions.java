@@ -1,12 +1,6 @@
 package com.learning.leetcodepractice.problems;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StreamProblemSolutions {
@@ -358,5 +352,24 @@ public class StreamProblemSolutions {
                 .map(String::toLowerCase)
                 .filter(word -> targetWords.contains(word))
                 .collect(Collectors.groupingBy(word -> word, Collectors.counting()));
+    }
+
+    /**
+     * Problem Statement #20: (Split full names into individual words using flatMap)
+     * <p>
+     * Example:
+     * Input:
+     * List<String> names = List.of("John Doe", "Alice Bob", "Charlie Brown");
+     * <p>
+     * Output:
+     * ["John", "Doe", "Alice", "Bob", "Charlie", "Brown"]
+     */
+    public static void getWordsFromNames() {
+        List<String> names = List.of("John Doe", "Alice Bob", "Charlie Brown");
+        List<String> words = names.stream()
+                .flatMap(name -> Arrays.stream(name.split(" ")))
+                .collect(Collectors.toList());
+
+        System.out.println(words);
     }
 }
