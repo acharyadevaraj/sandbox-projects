@@ -182,7 +182,7 @@ public class EasyArrayProblemSolutions {
 
         for (int j = 1; j < nums.length; j++) {
             // Check if current element is different from the last unique one
-            if (nums[j] != nums[i]) {
+            if (nums[j] != nums[j+1]) {
                 i++; // Move the unique pointer forward
                 nums[i] = nums[j]; // Update the position with the current unique element
             }
@@ -191,9 +191,15 @@ public class EasyArrayProblemSolutions {
     }
 
     /**
-     * @param nums1
-     * @param nums2
-     * @return Link : https://leetcode.com/problems/find-common-elements-between-two-arrays/
+     * Problem Statement: #7 (Find Common Elements in Two Arrays)
+     * Given two integer arrays, return an array containing the common elements.
+     * <p>
+     * Example:
+     * Input: nums1 = [1, 2, 3, 4], nums2 = [3, 4, 5, 6]
+     * Output: [3, 4]
+     * <p>
+     * Time Complexity: O(m + n) (HashSet operations are O(1))
+     * Space Complexity: O(min(m, n)) (For storing common elements)
      */
     public int[] findCommonElements(int[] nums1, int[] nums2) {
         Set<Integer> set1 = new HashSet<>();
@@ -280,5 +286,36 @@ public class EasyArrayProblemSolutions {
 
         int thirdDigit = num % 10; // Extract the third digit
         System.out.println(thirdDigit);
+    }
+
+    /**
+     * Problem Statement: #10 (Find Maximum in Bitonic Array)
+     * Given a bitonic array (first increasing, then decreasing), find the maximum element.
+     * The solution should have O(log n) time complexity.
+     * <p>
+     * Approach:
+     * 1. Use binary search to locate the maximum element.
+     * 2. If `arr[mid] > arr[mid + 1]`, the maximum is at `mid` or the left half.
+     * 3. Otherwise, the maximum is on the right half.
+     * <p>
+     * Example:
+     * Input: [2, 5, 7, 9, 11, 15, 21, 30, 17, 3, -2, -5]
+     * Output: 30
+     */
+    public static int findMaxInBitonic(int[] arr) {
+        int left = 0, right = arr.length - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] > arr[mid + 1]) {
+                // Decreasing part, max is at mid or left side
+                right = mid;
+            } else {
+                // Increasing part, max is on right side
+                left = mid + 1;
+            }
+        }
+        return arr[left]; // 'left' will point to the max element
     }
 }

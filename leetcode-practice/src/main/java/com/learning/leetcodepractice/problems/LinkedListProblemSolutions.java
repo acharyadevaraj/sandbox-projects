@@ -44,7 +44,7 @@ public class LinkedListProblemSolutions {
             return newNode;
         }
 
-        Node temp = newNode;
+        Node temp = head;
         while(temp != null){
             temp = temp.next;
         }
