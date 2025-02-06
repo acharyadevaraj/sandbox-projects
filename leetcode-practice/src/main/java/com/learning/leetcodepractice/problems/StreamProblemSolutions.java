@@ -218,8 +218,7 @@ public class StreamProblemSolutions {
         Character result = input.chars()
                 .mapToObj(c -> (char) c)
                 .filter(ch -> input.indexOf(ch) == input.lastIndexOf(ch))
-                .findFirst()
-                .get();
+                .findFirst().orElse(null);
         System.out.println(result);
     }
 
@@ -239,8 +238,7 @@ public class StreamProblemSolutions {
         Character result = input.chars()
                 .mapToObj(c -> (char) c)
                 .filter(ch -> input.indexOf(ch) != input.lastIndexOf(ch))
-                .findFirst()
-                .get();
+                .findFirst().orElse(null);
         System.out.println(result);
     }
 
