@@ -69,7 +69,7 @@ public class BinarySearchTree {
 
         tree.inOrder();
         System.out.println();
-        System.out.println("Is 7 in the tree? " + tree.search(7)); // Output: true
-        System.out.println("Is 20 in the tree? " + tree.search(20)); // Output: false
+        System.out.println("Is 7 in the tree? " + tree.search(7));
+        System.out.println("Is 20 in the tree? " + tree.search(20));
     }
 }

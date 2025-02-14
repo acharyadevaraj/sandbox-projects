@@ -40,6 +40,30 @@ public class StreamProblemSolutions {
     }
 
     /**
+     * Problem Statement: (Find the string with the maximum occurrences in a list of strings)
+     * <p>
+     * Approach:
+     * 1. Use the Stream API to count the occurrences of each string in the list by grouping and using `Collectors.counting()`.
+     * 2. Find the entry with the maximum occurrence by comparing the values using `Map.Entry.comparingByValue()`.
+     * 3. Retrieve the string with the highest frequency using `.getKey()`.
+     * 4. Use `.orElse("")` to handle the case where the list is empty (defaulting to an empty string).
+     * <p>
+     * Example:
+     * Input: ["abd", "dgh", "abd", "dgh", "abd", "abc"]
+     * Output: "abd"
+     */
+    public static void findMaxOccurrence() {
+        List<String> list = Arrays.asList("abd", "dgh", "abd", "dgh", "abd", "abc");
+        String result = list.stream()
+                .collect(Collectors.groupingBy(s -> s, Collectors.counting())) // Count occurrences
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(map -> map.getKey())
+                .orElse("");
+        System.out.println(result);
+    }
+
+    /**
      * Problem Statement #3: (Remove duplicates from a list of integers)
      * <p>
      * Approach:
@@ -369,5 +393,54 @@ public class StreamProblemSolutions {
                 .collect(Collectors.toList());
 
         System.out.println(words);
+    }
+
+    /**
+     * Problem Statement #20: (Sort a Map by values in ascending order)
+     * <p>
+     * Example:
+     * Input:
+     * Map<String, Integer> wordCountMap = {"java"=3, "is"=2, "oops"=2, "lang"=1}
+     * <p>
+     * Output:
+     * Sorted (Ascending): {"lang"=1, "is"=2, "oops"=2, "java"=3}
+     */
+    public static void sortMapByValuesAscending(Map<String, Integer> wordCountMap) {
+        LinkedHashMap<String, Integer> sortedMapAsc = wordCountMap.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue()) // Sort by value (ascending)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new // Preserve sorted order
+                ));
+        System.out.println("Original Map: " + wordCountMap);
+        System.out.println("Sorted (Ascending): " + sortedMapAsc);
+    }
+
+    /**
+     * Problem Statement #21: (Sort a Map by values in descending order)
+     * <p>
+     * Example:
+     * Input:
+     * Map<String,Integer> wordCountMap = {"java"=3, "is"=2, "oops"=2, "lang"=1}
+     * <p>
+     * Output:
+     * Sorted (Descending): {"java"=3, "is"=2, "oops"=2, "lang"=1}
+     */
+    public static void sortMapByValuesDescending(Map<String, Integer> wordCountMap) {
+        LinkedHashMap<String, Integer> sortedMapDesc = wordCountMap.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) // Sort by value (descending)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new // Preserve sorted order
+                ));
+
+        System.out.println("Original Map: " + wordCountMap);
+        System.out.println("Sorted (Descending): " + sortedMapDesc);
     }
 }

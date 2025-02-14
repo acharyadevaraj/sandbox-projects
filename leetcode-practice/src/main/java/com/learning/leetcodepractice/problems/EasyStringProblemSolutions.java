@@ -464,7 +464,7 @@ public class EasyStringProblemSolutions {
 
         // Step 2: Convert keys to a list and sort based on frequency (in descending order)
         List<Character> sortedCharacters = new ArrayList<>(frequencyMap.keySet());
-        sortedCharacters.sort((char1, char2) -> frequencyMap.get(char2) - frequencyMap.get(char1));
+        sortedCharacters.sort((a, b) -> frequencyMap.get(b) - frequencyMap.get(a));
 
         // Step 3: Build the resulting string by appending characters based on their frequencies
         for (char character : sortedCharacters) {
@@ -474,5 +474,102 @@ public class EasyStringProblemSolutions {
             }
         }
         return resultString.toString();
+    }
+
+    /**
+     * Problem Statement: (Find the string with the maximum occurrences in a list of strings)
+     * <p>
+     * Approach:
+     * 1. Create a `frequencyMap` to store the count of each string in the list.
+     * 2. Iterate through the list and update the frequency of each string in the map.
+     * 3. Track the string with the highest occurrence by comparing the current count with the previous maximum count.
+     * 4. After iterating through the entire list, return the string with the maximum occurrences.
+     * <p>
+     * Example:
+     * Input: ["abd", "dgh", "abd", "dgh", "abd", "abc"]
+     * Output: "abd"
+     */
+    public static String findMaxOccurrence(List<String> list) {
+
+        Map<String, Integer> frequencyMap = new HashMap<>();
+        String maxOccurrenceString = null;
+        int maxCount = 0;
+
+        for (String str : list) {
+            int count = frequencyMap.getOrDefault(str, 0) + 1;
+            frequencyMap.put(str, count);
+
+            if (maxCount < count) {
+                maxOccurrenceString = str;
+                maxCount = count;
+            }
+        }
+        return maxOccurrenceString;
+    }
+
+    /**
+     * Problem Statement: (Find missing letters to make a sentence a pangram)
+     * <p>
+     * Approach:
+     * 1. Convert the input sentence to lowercase to ensure case insensitivity.
+     * 2. Use a `HashSet<Character>` to store the unique letters present in the sentence.
+     * 3. Iterate through each character in the sentence and add only alphabetic characters ('a' to 'z') to the set.
+     * 4. Iterate from 'a' to 'z' and check which characters are missing from the set.
+     * 5. Append the missing characters to a `StringBuilder`.
+     * 6. Return the missing characters if any; otherwise, return "Already a Pangram!".
+     * <p>
+     * Example:
+     * Input: "The quick brown fx jumps over the lazy dg"
+     * Output: "c o"
+     */
+    public static String getMissingLetters(String sentence) {
+        if (sentence == null) return "Invalid input";
+
+        sentence = sentence.toLowerCase();
+        Set<Character> letters = new HashSet<>();
+
+        // Store all characters present in the sentence
+        for (char c : sentence.toCharArray()) {
+            if (c >= 'a' && c <= 'z') {
+                letters.add(c);
+            }
+        }
+
+        // Find missing characters
+        StringBuilder missing = new StringBuilder();
+        for (char c = 'a'; c <= 'z'; c++) {
+            if (!letters.contains(c)) {
+                missing.append(c);
+            }
+        }
+        return missing.length() == 0 ? "Already a Pangram!" : missing.toString();
+    }
+
+    /**
+     * Problem Statement: (Check if a given sentence is a pangram)
+     * <p>
+     * Approach:
+     * 1. Convert the input sentence to lowercase to ensure case insensitivity.
+     * 2. Use a `HashSet<Character>` to store the unique letters present in the sentence.
+     * 3. Iterate through the sentence and add only alphabetic characters ('a' to 'z') to the set.
+     * 4. If the size of the set reaches 26 (all letters present), return `true` indicating a pangram.
+     * 5. Otherwise, return `false`.
+     * <p>
+     * Example:
+     * Input: "The quick brown fox jumps over the lazy dog"
+     * Output: true
+     */
+    public static boolean isMissingLetters(String sentence) {
+        if (sentence == null) return false;
+
+        sentence = sentence.toLowerCase();
+        Set<Character> letters = new HashSet<>();
+
+        for (char c : sentence.toCharArray()) {
+            if (c >= 'a' && c <= 'z') {
+                letters.add(c);
+            }
+        }
+        return letters.size() == 26;
     }
 }

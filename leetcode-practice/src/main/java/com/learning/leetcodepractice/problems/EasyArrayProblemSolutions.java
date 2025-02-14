@@ -180,11 +180,11 @@ public class EasyArrayProblemSolutions {
 
         int i = 0; // Pointer for the last unique element
 
-        for (int j = 1; j < nums.length; j++) {
+        for (int j = 0; j < nums.length; j++) {
             // Check if current element is different from the last unique one
-            if (nums[j] != nums[j+1]) {
+            if (nums[j] != nums[j + 1]) {
                 i++; // Move the unique pointer forward
-                nums[i] = nums[j]; // Update the position with the current unique element
+                nums[i] = nums[j+1]; // Update the position with the current unique element
             }
         }
         return i + 1; // Length of the unique elements
@@ -317,5 +317,29 @@ public class EasyArrayProblemSolutions {
             }
         }
         return arr[left]; // 'left' will point to the max element
+    }
+
+    public static int[] mergeSortedArrays(int[] arr1, int[] arr2) {
+        int m = arr1.length, n = arr2.length;
+        int[] mergedArray = new int[m + n];
+        int i = 0, j = 0, k = 0;
+
+        // Merge arrays by comparing elements
+        while (i < m && j < n) {
+            if (arr1[i] <= arr2[j]) {
+                mergedArray[k++] = arr1[i++];
+            } else {
+                mergedArray[k++] = arr2[j++];
+            }
+        }
+        // Copy remaining elements of arr1 (if any)
+        while (i < m) {
+            mergedArray[k++] = arr1[i++];
+        }
+        // Copy remaining elements of arr2 (if any)
+        while (j < n) {
+            mergedArray[k++] = arr2[j++];
+        }
+        return mergedArray;
     }
 }

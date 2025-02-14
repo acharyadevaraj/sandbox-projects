@@ -1,15 +1,35 @@
 package com.learning.leetcodepractice.runner;
 
-public class TestRunner {
+interface A {
+    default void test() {
+        System.out.println("print A");
+    }
+}
+
+interface B {
+    default void test() {
+        System.out.println("print B");
+    }
+}
+
+public class TestRunner implements A, B {
 
     public static void main(String[] args) {
-        String input = "banana";
-
-        for (int i = 0; i < input.length(); i++) {
-            if (input.indexOf(input.charAt(i)) == input.lastIndexOf(input.charAt(i))) {
-
-            }
-        }
+        TestRunner runner = new TestRunner();
+        runner.callBTest();
     }
+
+    public void callBTest() {
+        B.super.test();
+    }
+
+    @Override
+    public void test() {
+
+    }
+}
+
+class C extends TestRunner {
+
 }
 
