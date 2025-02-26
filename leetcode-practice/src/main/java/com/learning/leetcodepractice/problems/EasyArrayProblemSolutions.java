@@ -184,7 +184,7 @@ public class EasyArrayProblemSolutions {
             // Check if current element is different from the last unique one
             if (nums[j] != nums[j + 1]) {
                 i++; // Move the unique pointer forward
-                nums[i] = nums[j+1]; // Update the position with the current unique element
+                nums[i] = nums[j + 1]; // Update the position with the current unique element
             }
         }
         return i + 1; // Length of the unique elements
@@ -202,31 +202,22 @@ public class EasyArrayProblemSolutions {
      * Space Complexity: O(min(m, n)) (For storing common elements)
      */
     public int[] findCommonElements(int[] nums1, int[] nums2) {
-        Set<Integer> set1 = new HashSet<>();
-        Set<Integer> set2 = new HashSet<>();
+        Set<Integer> set = new HashSet<>();
+        Set<Integer> resultSet = new HashSet<>();
 
-        for (int num : nums2) {
-            set1.add(num);
+        // Add all elements of nums1 to the set
+        for (int num : nums1) {
+            set.add(num);
         }
 
-        int count1 = 0;
-        for (int num : nums1) {
-            if (set1.contains(num)) {
-                count1++;
+        // Check nums2 elements in set
+        for (int num : nums2) {
+            if (set.contains(num)) {
+                resultSet.add(num);
             }
         }
-
-        for (int num : nums1) {
-            set2.add(num);
-        }
-
-        int count2 = 0;
-        for (int num : nums2) {
-            if (set2.contains(num)) {
-                count2++;
-            }
-        }
-        return new int[]{count1, count2};
+        // Convert Set to array
+        return resultSet.stream().mapToInt(Integer::intValue).toArray();
     }
 
     /**

@@ -389,7 +389,7 @@ public class StreamProblemSolutions {
     public static void getWordsFromNames() {
         List<String> names = List.of("John Doe", "Alice Bob", "Charlie Brown");
         List<String> words = names.stream()
-                .flatMap(name -> Arrays.stream(name.split(" ")))
+                .flatMap(name -> Arrays.stream(name.split("\\s+")))
                 .collect(Collectors.toList());
 
         System.out.println(words);
